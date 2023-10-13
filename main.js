@@ -14,7 +14,8 @@ function startGame(){
     const elementsSize = canvasSize / 10;
     console.log(`canvasSize: ${canvasSize} | elements size: ${elementsSize}`);
     game.font = elementsSize +'px Arial';
-    game.fillText(emojis['X'],35,35);
+    game.textAlign = 'center';
+   for(let i = 0; i < ){}
 
    
 }
