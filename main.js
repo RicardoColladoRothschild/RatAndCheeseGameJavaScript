@@ -13,8 +13,8 @@ function startGame(){
    
     const elementsSize = canvasSize / 10;
     console.log(`canvasSize: ${canvasSize} | elements size: ${elementsSize}`);
-    game.font = '35px Arial';
-    game.fillText('🐭',35,35);
+    game.font = elementsSize +'px Arial';
+    game.fillText(emojis['X'],35,35);
 
    
 }
