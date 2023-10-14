@@ -25,11 +25,11 @@ function startGame(){
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
     
-    for(let i = 1; i < 10; i++){
-
-     game.fillText(emojis['X'],elementsSize, elementsSize  * i);
-      for(let j = 1; j < 10; j++){
-        game.fillText(emojis['X'],elementsSize * j, elementsSize * i);
+    //para completar este ejercicio, hemos multiplicado las coordenadas por el elementsize, para
+    //de esta forma ir obteniendo la nueva posicion del elemento.
+    for(let row = 1; row < 10; row++){
+      for(let col = 1; col < 10; col++){
+        game.fillText(emojis['X'],elementsSize * col, elementsSize * row);
       }
       
     }   

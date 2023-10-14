@@ -18,4 +18,13 @@ donde x estara en un lugar distinto y etc...etc...etc..
 Recordando que x, dentro de un objeto de emojis, representa una emonji, y asi
 sucesivamente cada uno de los otros caracteres. 
 El reto es llenar de emojis el canvas
-clave: usando 2 cilos gfor de complejidad o(n^2)
+clave: usando 2 cilos gfor de complejidad o(n^2).
+
+//para completar este ejercicio, hemos multiplicado las coordenadas por el elementsize, para
+    //de esta forma ir obteniendo la nueva posicion del elemento.
+    for(let row = 1; row < 10; row++){
+      for(let col = 1; col < 10; col++){
+        game.fillText(emojis['X'],elementsSize * col, elementsSize * row);
+      }
+      
+    } 
