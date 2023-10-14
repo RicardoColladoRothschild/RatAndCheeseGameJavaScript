@@ -25,6 +25,11 @@ function startGame(){
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
     
+    const mapRows = maps[0].split('\n');
+    let bidimecionalArray = mapRows.map((element)=>element.split(''));
+    console.log(bidimecionalArray);
+    console.log(mapRows);
+
     //para completar este ejercicio, hemos multiplicado las coordenadas por el elementsize, para
     //de esta forma ir obteniendo la nueva posicion del elemento.
     for(let row = 1; row < 10; row++){
