@@ -27,10 +27,11 @@ function startGame(){
     
     for(let i = 1; i < 10; i++){
 
-     game.fillText(emojis['X'],elementsSize, elementsSize  * i);
-      for(let j = 2; j < 10; j++){
-        game.fillText(emojis['X'],elementsSize * j, elementsSize);
-      }
+     game.fillText(emojis['X'],elementsSize, (elementsSize)  * i);
+      for(let j = 1; j < 10; j++){
+        game.fillText(emojis['X'],elementsSize * j, elementsSize * i);
+        
+      }      
       
     }   
 }

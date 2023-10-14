@@ -18,4 +18,17 @@ donde x estara en un lugar distinto y etc...etc...etc..
 Recordando que x, dentro de un objeto de emojis, representa una emonji, y asi
 sucesivamente cada uno de los otros caracteres. 
 El reto es llenar de emojis el canvas
-clave: usando 2 cilos gfor de complejidad o(n^2)
+clave: usando 2 cilos gfor de complejidad o(n^2).
+
+La solucion que nosotros encontramos fue:
+```js
+ for(let i = 1; i < 10; i++){
+
+     game.fillText(emojis['X'],elementsSize, (elementsSize)  * i);
+      for(let j = 1; j < 10; j++){
+        game.fillText(emojis['X'],elementsSize * j, elementsSize * i);
+        
+      }      
+      
+    }   
+    ```
