@@ -12,7 +12,7 @@ function setCanvasSize(){
 
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
-    elementsSize = canvasSize / 10;
+    elementsSize = canvasSize / 10.5;
 
     startGame();
 }
@@ -25,16 +25,21 @@ function startGame(){
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
     
-    const mapRows = maps[0].split('\n');
-    let bidimecionalArray = mapRows.map((element)=>element.split(''));
-    console.log(bidimecionalArray);
+    const map = maps[0];
+    console.log(maps[0]);
+    const mapRows = maps[1].trim().split('\n'); 
     console.log(mapRows);
+
+    const mapRowCols = mapRows.map(row=>row.trim().split(''));
+    console.log(mapRowCols);
 
     //para completar este ejercicio, hemos multiplicado las coordenadas por el elementsize, para
     //de esta forma ir obteniendo la nueva posicion del elemento.
-    for(let row = 1; row < 10; row++){
-      for(let col = 1; col < 10; col++){
-        game.fillText(emojis['X'],elementsSize * col, elementsSize * row);
+    for(let row = 1; row <= 10; row++){
+      for(let col = 1; col <= 10; col++){
+        
+          game.fillText(emojis[mapRowCols[row-1][col-1]],elementsSize * col, elementsSize * row);
+              
       }
       
     }   
