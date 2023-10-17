@@ -61,4 +61,23 @@ function startGame(){
     //   }
       
     // }   
+
+}
+
+btnUp.addEventListener('click', moveUp);
+btnLeft.addEventListener('click', moveLeft);
+btnRight.addEventListener('click', moveRight);
+btnDown.addEventListener('click',moveDown);
+
+function moveUp(){
+  console.log('move up');
+}
+function moveLeft(){
+  console.log('move Left');
+}
+function moveRight(){
+  console.log('move Right');
+}
+function moveDown(){
+  console.log('move Down');
 }
