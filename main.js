@@ -88,13 +88,14 @@ btnDown.addEventListener('click',moveDown);
 
 function moveUp(){
   
-    /*
+    /*MY SOLUTION FOR NOT GOING OUT OF MAP
     if(playerPosition.y > (4 + elementsSize)){
       console.log(canvasSize);
       playerPosition.y -= elementsSize;
+    
     }*/
 
-    if((playerPosition.y - elementsSize) < 0){
+    if((playerPosition.y - elementsSize) < elementsSize){
       console.log('OUT');
       
     }else{
@@ -111,10 +112,19 @@ function moveUp(){
 }
 function moveLeft(){
   
-  
-    if(playerPosition.x > 1.5){
+    //MY SOLUTION:
+    /*if(playerPosition.x > 1.5){
       playerPosition.x -= elementsSize;
-    }
+    }*/
+
+      /* Platzi Solution:*/
+      if((playerPosition.x - elementsSize) < elementsSize){
+        console.log('OUT');
+        
+      }else{
+        console.log(canvasSize);
+        playerPosition.x -= elementsSize;
+      }
     
     
     movePlayer();
@@ -122,9 +132,17 @@ function moveLeft(){
 }
 function moveRight(){
   
-    console.log(playerPosition.x);
-    console.log(elementsSize);
+    /*My solution
     if(playerPosition.x < (canvasSize- elementsSize)){
+      playerPosition.x += elementsSize;
+    }*/
+
+    /**Platzi Solution */
+    if((playerPosition.x + elementsSize) > canvasSize){
+      console.log('OUT');
+      
+    }else{
+      console.log(canvasSize);
       playerPosition.x += elementsSize;
     }
     
@@ -134,12 +152,19 @@ function moveRight(){
 }
 function moveDown(){
   
-  
+      /*Mi solucion:
       if(playerPosition.y <= (canvasSize - elementsSize)){
         playerPosition.y += elementsSize;
-      }
+      }*/
               
-      
+      /**Platzi solution */
+      if((playerPosition.y + elementsSize) > canvasSize){
+        console.log('OUT');
+        
+      }else{
+        console.log(canvasSize);
+        playerPosition.y += elementsSize;
+      }      
     
     
     movePlayer();
