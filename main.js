@@ -3,6 +3,11 @@ const game = canvas.getContext('2d'); // nos referimos a que van a haber 2 ejes,
 let canvasSize;
 let elementsSize;
 
+const playerPosition = {
+  x:undefined,
+  y:undefined
+};
+
 //getting btns from DOM
 const btnUp = document.querySelector('#arriba');
 const btnLeft = document.querySelector('#izquierda');
@@ -47,21 +52,27 @@ function startGame(){
         const posX = elementsSize * (colIndx + 1);
         const posY = elementsSize * (rowIndx + 1);
 
+        if(col=='O'){
+          playerPosition.x = posX;
+          playerPosition.y = posY;
+          console.log(playerPosition);
+        }
+        
+
         game.fillText(emoji, posX, posY);
       });
     });
 
-    //para completar este ejercicio, hemos multiplicado las coordenadas por el elementsize, para
-    //de esta forma ir obteniendo la nueva posicion del elemento.
-    // for(let row = 1; row <= 10; row++){
-    //   for(let col = 1; col <= 10; col++){
-        
-    //       game.fillText(emojis[mapRowCols[row-1][col-1]],elementsSize * col, elementsSize * row);
-              
-    //   }
-      
-    // }   
+    
 
+    movePlayer();
+   
+
+}
+
+function movePlayer(){
+  const player = emojis['PLAYER'];
+    game.fillText(player,playerPosition.x,playerPosition.y);
 }
 
 btnUp.addEventListener('click', moveUp);
@@ -71,6 +82,15 @@ btnDown.addEventListener('click',moveDown);
 
 function moveUp(){
   console.log('move up');
+    
+  game.fillText('',playerPosition.x,playerPosition.y);
+  game.clearRect(playerPosition.x-5,playerPosition.y-5,75,75);
+    playerPosition.y -= elementsSize;
+    
+    movePlayer();
+    
+    
+  
 }
 function moveLeft(){
   console.log('move Left');
@@ -80,4 +100,18 @@ function moveRight(){
 }
 function moveDown(){
   console.log('move Down');
+}
+
+window.addEventListener('keydown', moveByKeys);
+
+function moveByKeys(event){
+  if(event.key == 'ArrowUp'){
+    moveUp();
+  }else if(event.key == 'ArrowDown'){
+    moveDown();
+  }else if(event.key == 'ArrowRight'){
+    moveRight();
+  }else if(event.key == 'ArrowLeft'){
+    moveLeft();
+  }
 }
