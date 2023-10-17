@@ -2,6 +2,14 @@ const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d'); // nos referimos a que van a haber 2 ejes, eje x y eje y.
 let canvasSize;
 let elementsSize;
+
+//getting btns from DOM
+const btnUp = document.querySelector('#arriba');
+const btnLeft = document.querySelector('#izquierda');
+const btnRight = document.querySelector('#derecha');
+const btnDown = document.querySelector('#abajo');
+
+
 window.addEventListener('load', setCanvasSize);
 
 
