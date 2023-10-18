@@ -64,9 +64,8 @@ function startGame(){
         }else if(col==='I'){
           giftPosition.x = posX;
           giftPosition.y = posY;
-          console.log(`gift: `);
-          console.log(giftPosition);
-          console.log('After figt');
+          
+          
         }
         
 
@@ -84,9 +83,16 @@ function startGame(){
 }
 
 function movePlayer(){
-  
-  const player = emojis['PLAYER'];
-  
+  //compare if player and gift are on same position
+  const giftCollisionX = playerPosition.x.toFixed() == giftPosition.x.toFixed();
+  const giftCollisionY = playerPosition.y.toFixed() == giftPosition.y.toFixed();
+  const giftCollision = giftCollisionX && giftCollisionY;
+
+  if(giftCollision){
+    console.log('level up');
+  }  
+
+    const player = emojis['PLAYER'];  
     game.fillText(player,playerPosition.x,playerPosition.y);
   
     
