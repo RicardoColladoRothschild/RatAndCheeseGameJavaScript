@@ -47,7 +47,7 @@ function startGame(){
     
     const map = maps[0];
     
-    const mapRows = maps[0].trim().split('\n');    
+    const mapRows = maps[1].trim().split('\n');    
 
     const mapRowCols = mapRows.map(row=>row.trim().split(''));    
 
@@ -64,9 +64,7 @@ function startGame(){
         }else if(col==='I'){
           giftPosition.x = posX;
           giftPosition.y = posY;
-          console.log(`gift: `);
-          console.log(giftPosition);
-          console.log('After figt');
+          
         }
         
 
@@ -83,11 +81,23 @@ function startGame(){
 
 }
 
+function collisionGift(){
+    let playerPosTotal = playerPosition.x + playerPosition.y;
+    let giftPositionTotal = giftPosition.x + giftPosition.y;
+
+      if(playerPosTotal === giftPositionTotal){
+        game.clearRect(0,0,canvasSize,canvasSize);
+        game.font = '35px verdana';
+        game.fillText('Ganaste!!!',200,150);
+      }
+}
+
 function movePlayer(){
   
   const player = emojis['PLAYER'];
-  
+
     game.fillText(player,playerPosition.x,playerPosition.y);
+    collisionGift();
   
     
 }
