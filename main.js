@@ -13,7 +13,7 @@ const giftPosition = {
   y:undefined
 };
 
-const enemiesPositions = [];
+let enemyPositions = [];
 
 
 //getting btns from DOM
@@ -41,19 +41,18 @@ function setCanvasSize(){
 }
 
 function startGame(){
-
-  //setCanvasSize();
   
    
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
     
-    const map = maps[0];
-    
+    const map = maps[0];    
     const mapRows = maps[0].trim().split('\n');    
-
     const mapRowCols = mapRows.map(row=>row.trim().split(''));    
-
+    
+  //we need to remove every element from the enemies arrays, to reaload it.
+    enemyPositions = [];
+    game.clearRect(0,0,canvasSize,canvasSize);
     mapRowCols.forEach((rows, rowIndx)=>{
        rows.forEach((col, colIndx)=>{
         const emoji = emojis[col];
@@ -69,7 +68,7 @@ function startGame(){
           giftPosition.y = posY;         
           
         }else if(col == 'X'){
-          enemiesPositions.push({
+          enemyPositions.push({
             x: posX,
             y: posY
           });
@@ -85,6 +84,7 @@ function startGame(){
     
     movePlayer();
     console.log(playerPosition);
+    console.log(enemyPositions);
    
 
 }
