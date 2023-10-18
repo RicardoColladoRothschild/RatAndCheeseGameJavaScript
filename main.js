@@ -8,6 +8,11 @@ const playerPosition = {
   y:undefined
 };
 
+const giftPosition = {
+  x:undefined,
+  y:undefined
+};
+
 //getting btns from DOM
 const btnUp = document.querySelector('#arriba');
 const btnLeft = document.querySelector('#izquierda');
@@ -56,6 +61,12 @@ function startGame(){
           playerPosition.x = posX;
           playerPosition.y = posY;
           console.log(playerPosition);
+        }else if(col==='I'){
+          giftPosition.x = posX;
+          giftPosition.y = posY;
+          console.log(`gift: `);
+          console.log(giftPosition);
+          console.log('After figt');
         }
         
 
