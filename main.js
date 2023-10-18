@@ -84,8 +84,8 @@ function startGame(){
 
 function movePlayer(){
   //compare if player and gift are on same position
-  const giftCollisionX = playerPosition.x.toFixed() == giftPosition.x.toFixed();
-  const giftCollisionY = playerPosition.y.toFixed() == giftPosition.y.toFixed();
+  const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
+  const giftCollisionY = playerPosition.y.toFixed(3 == giftPosition.y.toFixed(3);
   const giftCollision = giftCollisionX && giftCollisionY;
 
   if(giftCollision){
