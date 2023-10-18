@@ -99,6 +99,15 @@ function movePlayer(){
     console.log('level up');
   }  
 
+  const enemyCollision = enemyPositions.find(enemy=>{
+    const enemyCollisionX = enemy.x == playerPosition.x;
+    const enemyCollisionY = enemy.y == playerPosition.y;
+      return enemyCollisionX && enemyCollisionY;
+  });
+
+    if(enemyCollision){
+      console.log('Chocaste contra un enemigo :(');
+    }
     const player = emojis['PLAYER'];  
     game.fillText(player,playerPosition.x,playerPosition.y);
   
