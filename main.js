@@ -13,6 +13,9 @@ const giftPosition = {
   y:undefined
 };
 
+const enemiesPositions = [];
+
+
 //getting btns from DOM
 const btnUp = document.querySelector('#arriba');
 const btnLeft = document.querySelector('#izquierda');
@@ -63,9 +66,13 @@ function startGame(){
           console.log(playerPosition);
         }else if(col==='I'){
           giftPosition.x = posX;
-          giftPosition.y = posY;
+          giftPosition.y = posY;         
           
-          
+        }else if(col == 'X'){
+          enemiesPositions.push({
+            x: posX,
+            y: posY
+          });
         }
         
 
@@ -85,7 +92,7 @@ function startGame(){
 function movePlayer(){
   //compare if player and gift are on same position
   const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
-  const giftCollisionY = playerPosition.y.toFixed(3 == giftPosition.y.toFixed(3);
+  const giftCollisionY = playerPosition.y.toFixed(3)== giftPosition.y.toFixed(3);
   const giftCollision = giftCollisionX && giftCollisionY;
 
   if(giftCollision){
