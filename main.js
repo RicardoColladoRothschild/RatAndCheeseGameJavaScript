@@ -15,6 +15,7 @@ const giftPosition = {
 
 let enemyPositions = [];
 let level = 0;
+let lives = 3;
 
 //getting btns from DOM
 const btnUp = document.querySelector('#arriba');
@@ -100,9 +101,17 @@ function gameWin(){
 }
 
 function levelLoseRestart(){
-  playerPosition.x = undefined;
-  playerPosition.y = undefined;
-  startGame()
+  lives--;
+    if(lives <= 0){
+      level = 0;
+      lives = 3;
+      
+    }
+       playerPosition.x = undefined;
+      playerPosition.y = undefined;
+      startGame();
+
+  
 }
 
 function movePlayer(){
