@@ -24,8 +24,6 @@ const btnDown = document.querySelector('#abajo');
 
 
 window.addEventListener('load', setCanvasSize);
-
-
 window.addEventListener('resize',setCanvasSize);
 
 function setCanvasSize(){
@@ -34,7 +32,7 @@ function setCanvasSize(){
 
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
-    elementsSize = canvasSize / 10.5;
+    elementsSize = canvasSize / 10.4;
 
     
     startGame();
@@ -45,7 +43,8 @@ function startGame(){
    
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
-    if(level>3)level=3;
+    console.log(level);
+
     const map = maps[level];
     if(!map){
       console.log('Won::::::::');
@@ -69,7 +68,7 @@ function startGame(){
         if(col=='O' && (playerPosition.x===undefined && playerPosition.y===undefined)){
           playerPosition.x = posX;
           playerPosition.y = posY;
-          console.log(playerPosition);
+          
         }else if(col==='I'){
           giftPosition.x = posX;
           giftPosition.y = posY;         
@@ -90,9 +89,7 @@ function startGame(){
     
     
     movePlayer();
-    console.log(playerPosition);
-    console.log(enemyPositions);
-   
+      
 
 }
 
@@ -107,7 +104,9 @@ function movePlayer(){
   const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
   const giftCollisionY = playerPosition.y.toFixed(3)== giftPosition.y.toFixed(3);
   const giftCollision = giftCollisionX && giftCollisionY;
-
+  console.log(giftCollision);
+  console.log(`${playerPosition.x.toFixed(3)} ${giftPosition.x.toFixed(3)}`);
+  console.log(`${playerPosition.y.toFixed(3)} ${giftPosition.y.toFixed(3)}`);
   if(giftCollision){
     levelWin();
   }  
@@ -151,6 +150,7 @@ function moveUp(){
     }else{
       
       playerPosition.y -= elementsSize;
+      
     }
 
     
@@ -171,6 +171,7 @@ function moveLeft(){
       }else{
         
         playerPosition.x -= elementsSize;
+        
       }
     
     
@@ -191,6 +192,7 @@ function moveRight(){
     }else{
       
       playerPosition.x += elementsSize;
+      
     }
     
     
@@ -211,6 +213,7 @@ function moveDown(){
       }else{
         
         playerPosition.y += elementsSize;
+        
       }      
     
     
