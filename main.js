@@ -13,6 +13,12 @@ const giftPosition = {
   y:undefined
 };
 
+let levelStartPoint = {
+  x:undefined,
+  y:undefined
+}
+
+
 let enemyPositions = [];
 let level = 0;
 
@@ -65,9 +71,17 @@ function startGame(){
         const posX = elementsSize * (colIndx + 1);
         const posY = elementsSize * (rowIndx + 1);
 
+
+        if(col=='O'){
+          levelStartPoint.x = posX;
+          levelStartPoint.y = posY;
+        }
+
         if(col=='O' && (playerPosition.x===undefined && playerPosition.y===undefined)){
           playerPosition.x = posX;
           playerPosition.y = posY;
+
+          
           
         }else if(col==='I'){
           giftPosition.x = posX;
@@ -98,7 +112,11 @@ function gameWin(){
   game.font = '29px Verdana';
   game.fillText('You did it',250,250);
 }
-
+function playerLoseLevel(){
+  playerPosition.x = levelStartPoint.x;
+  playerPosition.y = levelStartPoint.y;
+  
+}
 function movePlayer(){
   //compare if player and gift are on same position
   const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
@@ -119,9 +137,9 @@ function movePlayer(){
 
     if(enemyCollision){
       console.log('Chocaste contra un enemigo :(');
-      const playerOver = emojis['GAME_OVER'];  
-        console.log(playerOver);
+      const playerOver = emojis['GAME_OVER'];          
       game.fillText(playerOver,playerPosition.x,playerPosition.y);
+      playerLoseLevel();
     }else{
       const player = emojis['PLAYER'];  
       game.fillText(player,playerPosition.x,playerPosition.y);
