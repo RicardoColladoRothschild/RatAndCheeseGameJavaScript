@@ -14,7 +14,7 @@ const giftPosition = {
 };
 
 let enemyPositions = [];
-
+let level = 0;
 
 //getting btns from DOM
 const btnUp = document.querySelector('#arriba');
@@ -45,9 +45,16 @@ function startGame(){
    
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
-    
-    const map = maps[0];    
-    const mapRows = maps[0].trim().split('\n');    
+    if(level>3)level=3;
+    const map = maps[level];
+    if(!map){
+      console.log('Won::::::::');
+      console.log(map);
+      console.log(`level: ${level}`);
+      gameWin();
+    }
+
+    const mapRows = map.trim().split('\n');    
     const mapRowCols = mapRows.map(row=>row.trim().split(''));    
     
   //we need to remove every element from the enemies arrays, to reaload it.
@@ -89,6 +96,12 @@ function startGame(){
 
 }
 
+function gameWin(){
+  game.clearRect(0,0,canvasSize,canvasSize);
+  game.font = '29px Verdana';
+  game.fillText('You did it',250,250);
+}
+
 function movePlayer(){
   //compare if player and gift are on same position
   const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
@@ -96,7 +109,7 @@ function movePlayer(){
   const giftCollision = giftCollisionX && giftCollisionY;
 
   if(giftCollision){
-    console.log('level up');
+    levelWin();
   }  
 
   const enemyCollision = enemyPositions.find(enemy=>{
@@ -107,11 +120,22 @@ function movePlayer(){
 
     if(enemyCollision){
       console.log('Chocaste contra un enemigo :(');
-    }
-    const player = emojis['PLAYER'];  
-    game.fillText(player,playerPosition.x,playerPosition.y);
+      const playerOver = emojis['GAME_OVER'];  
+        console.log(playerOver);
+      game.fillText(playerOver,playerPosition.x,playerPosition.y);
+    }else{
+      const player = emojis['PLAYER'];  
+      game.fillText(player,playerPosition.x,playerPosition.y);
   
+    }
     
+    
+}
+
+function levelWin(){
+  console.log('Subiste de nivel');
+  level++;
+  startGame();
 }
 
 btnUp.addEventListener('click', moveUp);
@@ -121,18 +145,11 @@ btnDown.addEventListener('click',moveDown);
 
 function moveUp(){
   
-    /*MY SOLUTION FOR NOT GOING OUT OF MAP
-    if(playerPosition.y > (4 + elementsSize)){
-      console.log(canvasSize);
-      playerPosition.y -= elementsSize;
-    
-    }*/
-
-    if((playerPosition.y - elementsSize) < elementsSize){
+      if((playerPosition.y - elementsSize) < elementsSize){
       console.log('OUT');
       
     }else{
-      console.log(canvasSize);
+      
       playerPosition.y -= elementsSize;
     }
 
@@ -145,17 +162,14 @@ function moveUp(){
 }
 function moveLeft(){
   
-    //MY SOLUTION:
-    /*if(playerPosition.x > 1.5){
-      playerPosition.x -= elementsSize;
-    }*/
+    
 
       /* Platzi Solution:*/
       if((playerPosition.x - elementsSize) < elementsSize){
         console.log('OUT');
         
       }else{
-        console.log(canvasSize);
+        
         playerPosition.x -= elementsSize;
       }
     
@@ -175,7 +189,7 @@ function moveRight(){
       console.log('OUT');
       
     }else{
-      console.log(canvasSize);
+      
       playerPosition.x += elementsSize;
     }
     
@@ -195,7 +209,7 @@ function moveDown(){
         console.log('OUT');
         
       }else{
-        console.log(canvasSize);
+        
         playerPosition.y += elementsSize;
       }      
     
