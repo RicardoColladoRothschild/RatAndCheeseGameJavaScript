@@ -99,6 +99,12 @@ function gameWin(){
   game.fillText('You did it',250,250);
 }
 
+function levelLoseRestart(){
+  playerPosition.x = undefined;
+  playerPosition.y = undefined;
+  startGame()
+}
+
 function movePlayer(){
   //compare if player and gift are on same position
   const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
@@ -118,10 +124,8 @@ function movePlayer(){
   });
 
     if(enemyCollision){
-      console.log('Chocaste contra un enemigo :(');
-      const playerOver = emojis['GAME_OVER'];  
-        console.log(playerOver);
-      game.fillText(playerOver,playerPosition.x,playerPosition.y);
+      levelLoseRestart();
+      
     }else{
       const player = emojis['PLAYER'];  
       game.fillText(player,playerPosition.x,playerPosition.y);
