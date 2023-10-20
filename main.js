@@ -3,6 +3,7 @@ const game = canvas.getContext('2d'); // nos referimos a que van a haber 2 ejes,
 let canvasSize;
 let elementsSize;
 
+const spanLives = document.querySelector('#lives');
 const playerPosition = {
   x:undefined,
   y:undefined
@@ -56,7 +57,7 @@ function startGame(){
 
     const mapRows = map.trim().split('\n');    
     const mapRowCols = mapRows.map(row=>row.trim().split(''));    
-    
+    showLives();
   //we need to remove every element from the enemies arrays, to reaload it.
     enemyPositions = [];
     game.clearRect(0,0,canvasSize,canvasSize);
@@ -100,8 +101,27 @@ function gameWin(){
   game.fillText('You did it',250,250);
 }
 
+//this functions add the hearts to the p element to show how many lives has teh user left
+function showLives(){
+  spanLives.innerHTHML = '';
+  //spanLives.innerHTML = `${emojis['HEART']}  ${emojis['HEART']}  ${emojis['HEART']}`;
+  let heartLives = [emojis['HEART'], emojis['HEART'], emojis['HEART']];
+
+  let currentLives = heartLives.slice(0,lives);
+  let heartStatus = '';
+  
+  currentLives.forEach(e=>{
+    heartStatus +=e;
+  });
+  spanLives.innerHTML = heartStatus;
+  
+
+}
+
 function levelLoseRestart(){
   lives--;
+
+    
     if(lives <= 0){
       level = 0;
       lives = 3;

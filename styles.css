@@ -51,6 +51,7 @@ button:not(:last-child){
     margin: 0 auto;
     width: 80%;
     max-width: 460px;
+    
 }
 
 p{
