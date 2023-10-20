@@ -103,17 +103,14 @@ function gameWin(){
 
 //this functions add the hearts to the p element to show how many lives has teh user left
 function showLives(){
-  spanLives.innerHTHML = '';
-  //spanLives.innerHTML = `${emojis['HEART']}  ${emojis['HEART']}  ${emojis['HEART']}`;
-  let heartLives = [emojis['HEART'], emojis['HEART'], emojis['HEART']];
 
-  let currentLives = heartLives.slice(0,lives);
-  let heartStatus = '';
-  
-  currentLives.forEach(e=>{
-    heartStatus +=e;
+
+  const heartArrays = Array(lives).fill(emojis['HEART']);
+  spanLives.innerHTML = '';
+  heartArrays.forEach(heart=>{
+    spanLives.append(heart);
   });
-  spanLives.innerHTML = heartStatus;
+  
   
 
 }
