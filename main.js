@@ -4,6 +4,8 @@ let canvasSize;
 let elementsSize;
 
 const spanLives = document.querySelector('#lives');
+const spanTime = document.querySelector('#time');
+
 const playerPosition = {
   x:undefined,
   y:undefined
@@ -17,6 +19,10 @@ const giftPosition = {
 let enemyPositions = [];
 let level = 0;
 let lives = 3;
+
+let timeStart;
+let timePlayer;
+let timeInterval;
 
 //getting btns from DOM
 const btnUp = document.querySelector('#arriba');
@@ -49,12 +55,13 @@ function startGame(){
 
     const map = maps[level];
     if(!map){
-      console.log('Won::::::::');
-      console.log(map);
-      console.log(`level: ${level}`);
+    
       gameWin();
     }
 
+    if(!timeStart){
+      timeStart = Date.now();
+    }
     const mapRows = map.trim().split('\n');    
     const mapRowCols = mapRows.map(row=>row.trim().split(''));    
     showLives();
@@ -113,6 +120,11 @@ function showLives(){
   
   
 
+}
+
+function showTime(){
+
+  spanTime = Date.now();
 }
 
 function levelLoseRestart(){
