@@ -1,5 +1,6 @@
 const canvas = document.querySelector('#game');
-const game = canvas.getContext('2d'); // nos referimos a que van a haber 2 ejes, eje x y eje y.
+const game = canvas.getContext('2d');
+ // nos referimos a que van a haber 2 ejes, eje x y eje y.
 let canvasSize;
 let elementsSize;
 
@@ -138,6 +139,7 @@ function levelLoseRestart(){
     if(lives <= 0){
       level = 0;
       lives = 3;
+      timeStart = undefined;
       
     }
        playerPosition.x = undefined;
