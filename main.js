@@ -61,6 +61,7 @@ function startGame(){
 
     if(!timeStart){
       timeStart = Date.now();
+      timeInterval = setInterval(showTime, 100)
     }
     const mapRows = map.trim().split('\n');    
     const mapRowCols = mapRows.map(row=>row.trim().split(''));    
@@ -81,6 +82,9 @@ function startGame(){
         }else if(col==='I'){
           giftPosition.x = posX;
           giftPosition.y = posY;         
+          console.log('QUESO EN POSICION:');
+          console.log(giftPosition.x);
+          console.log(giftPosition.y);
           
         }else if(col == 'X'){
           enemyPositions.push({
@@ -103,9 +107,8 @@ function startGame(){
 }
 
 function gameWin(){
-  game.clearRect(0,0,canvasSize,canvasSize);
-  game.font = '29px Verdana';
-  game.fillText('You did it',250,250);
+  console.log('Game finished');
+  clearInterval(timeInterval);
 }
 
 //this functions add the hearts to the p element to show how many lives has teh user left
@@ -124,7 +127,8 @@ function showLives(){
 
 function showTime(){
 
-  spanTime = Date.now();
+  spanTime.innerHTML =  Date.now() - timeStart;
+ // timeStart = Date.now();
 }
 
 function levelLoseRestart(){
@@ -207,7 +211,7 @@ function moveLeft(){
     
 
       /* Platzi Solution:*/
-      if((playerPosition.x - elementsSize) < elementsSize){
+      if((playerPosition.x - Math.floor(elementsSize)) < Math.floor(elementsSize)){
         console.log('OUT');
         
       }else{
