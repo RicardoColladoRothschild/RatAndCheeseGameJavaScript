@@ -10,21 +10,26 @@ const btnRight = document.querySelector('#derecha');
 const btnDown = document.querySelector('#abajo');
 
 
- // nos referimos a que van a haber 2 ejes, eje x y eje y.
+ // Will use the measure of the current windows to adjust canvasSize. Elementsize will be my elements inside the canvas,
+ //which i will mesuare depending on canvassize (which will resize if the windows resize.)
 let canvasSize;
 let elementsSize;
 let level = 0;
 let lives = 3;
 
+//Handling time information, new record, and old record information. Everytime a player beat an old record it will be save on a
+//localStorage.
 let timeStart;
 let timePlayer;
 let timeInterval;
 
+//palyer position for a 2d dimension game, using x and y axis. 
 const playerPosition = {
   x:undefined,
   y:undefined
 };
 
+//this is the goal, every time a new map is load it it needs to be change, positions are also given by a 3 dimension 
 const giftPosition = {
   x:undefined,
   y:undefined
@@ -48,16 +53,21 @@ function setCanvasSize(){
   } else {
     canvasSize = window.innerHeight * 0.7;
   }
+
+    canvasSize = Number(canvasSize.toFixed(0));
+
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
     elementsSize = canvasSize / 10.4;
 
-    
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
     startGame();
 }
 
 function startGame(){
-  
+  console.log({canvasSize, elementsSize});
+  console.log(window.innerWidth, window.innerHeight);
    
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
@@ -245,7 +255,7 @@ function moveUp(){
   }
     
     movePlayer();
-    setCanvasSize();
+    //setCanvasSize();
     
     
   
@@ -261,12 +271,12 @@ function moveLeft(){
       }else{
         
         playerPosition.x -= elementsSize;
-        
+        startGame();
       }
     
     
     movePlayer();
-    setCanvasSize();
+    //setCanvasSize();
 }
 function moveRight(){
   
@@ -282,12 +292,12 @@ function moveRight(){
     }else{
       
       playerPosition.x += elementsSize;
-      
+      startGame();
     }
     
     
     movePlayer();
-    setCanvasSize();
+    //setCanvasSize();
 }
 function moveDown(){
   
@@ -303,12 +313,12 @@ function moveDown(){
       }else{
         
         playerPosition.y += elementsSize;
-        
+        startGame();
       }      
     
     
     movePlayer();
-    setCanvasSize();
+    //setCanvasSize();
 }
 
 window.addEventListener('keydown', moveByKeys);
