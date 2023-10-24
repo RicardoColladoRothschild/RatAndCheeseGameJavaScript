@@ -1,11 +1,22 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
+const spanLives = document.querySelector('#lives');
+const spanTime = document.querySelector('#time');
+const btnUp = document.querySelector('#arriba');
+const btnLeft = document.querySelector('#izquierda');
+const btnRight = document.querySelector('#derecha');
+const btnDown = document.querySelector('#abajo');
+
+
  // nos referimos a que van a haber 2 ejes, eje x y eje y.
 let canvasSize;
 let elementsSize;
+let level = 0;
+let lives = 3;
 
-const spanLives = document.querySelector('#lives');
-const spanTime = document.querySelector('#time');
+let timeStart;
+let timePlayer;
+let timeInterval;
 
 const playerPosition = {
   x:undefined,
@@ -18,26 +29,15 @@ const giftPosition = {
 };
 
 let enemyPositions = [];
-let level = 0;
-let lives = 3;
-
-let timeStart;
-let timePlayer;
-let timeInterval;
 
 //getting btns from DOM
-const btnUp = document.querySelector('#arriba');
-const btnLeft = document.querySelector('#izquierda');
-const btnRight = document.querySelector('#derecha');
-const btnDown = document.querySelector('#abajo');
-
 
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize',setCanvasSize);
 
 function setCanvasSize(){
   
-  canvasSize = Math.min(window.innerWidth, window.innerHeight) * 0.8;
+  canvasSize = Math.min(window.innerWidth, window.innerHeight) * 0.7;
 
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
@@ -62,8 +62,10 @@ function startGame(){
 
     if(!timeStart){
       timeStart = Date.now();
-      timeInterval = setInterval(showTime, 100)
+      timeInterval = setInterval(showTime, 100);
     }
+
+
     const mapRows = map.trim().split('\n');    
     const mapRowCols = mapRows.map(row=>row.trim().split(''));    
     showLives();
@@ -110,6 +112,21 @@ function startGame(){
 function gameWin(){
   console.log('Game finished');
   clearInterval(timeInterval);
+  const playerTime = Date.now() - timeStart;
+  const recordTime = localStorage.getItem('record_time');
+    if(recordTime){
+      
+        if(recordTime > playerTime){
+          localStorage.setItem('record_time',playerTime);
+          console.log('Superaste el record, felicidades');
+        }else{
+          console.log('Lo siento, no superaste el record');
+        }
+    }else{
+      localStorage.setItem('record_time',playerTime);
+    }
+
+  console.log(recordTime, playerTime);
 }
 
 //this functions add the hearts to the p element to show how many lives has teh user left
