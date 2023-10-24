@@ -66,6 +66,9 @@ function setCanvasSize(){
 }
 
 function startGame(){
+
+  
+
     //Providing size for the elements inside the canvas, again, base on canvas size we get the elementsSize, which came as a result from the windows size
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
@@ -145,9 +148,11 @@ function gameWin(){
   const recordTime = localStorage.getItem('record_time');
     if(recordTime){
       
-        if(recordTime > playerTime){
+      
+        if(recordTime < playerTime){
           localStorage.setItem('record_time',playerTime);
           pResult.innerHTML = 'Superaste el record, felicidades';
+          screenAfterWin();
         }else{
           pResult.innerHTML = 'Lo siento, no superaste el record';
         }
@@ -159,6 +164,22 @@ function gameWin(){
   console.log(recordTime, playerTime);
 }
 
+function screenAfterWin(){
+  game.clearRect(0,0,canvasSize,canvasSize);
+  canvas.classList.add('canvas-winner');
+    btnUp.classList.add('inactive');
+    btnRight.classList.add('inactive');
+    btnLeft.classList.add('inactive');
+    btnDown.classList.add('inactive');
+
+      //creting congrats text
+      game.font = '16px Verdana';
+      game.fillStyle = 'Red';
+        game.fillText('🎉🎉🎉Felicidades! has batido un record🎉🎉🎉',(canvasSize/2),(canvasSize/2));
+        game.fillRect(55,25,250,150);
+
+
+}
 //this functions add the hearts to the p element to show how many lives has teh user left
 function showLives(){
 

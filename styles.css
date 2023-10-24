@@ -23,6 +23,16 @@ canvas{
     background-color:#feff9d;
 }
 
+/*class for changing canvas color when win*/
+.canvas-winner{
+    background-color:aquamarine;
+}
+
+/*Class to hide elements*/
+.inactive{
+    display:none;
+}
+
 .btns{
     display:flex;
     justify-content: center;
