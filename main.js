@@ -2,6 +2,8 @@ const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
 const spanLives = document.querySelector('#lives');
 const spanTime = document.querySelector('#time');
+const spanRecord = document.querySelector('#record');
+const pResult = document.querySelector('#result');
 const btnUp = document.querySelector('#arriba');
 const btnLeft = document.querySelector('#izquierda');
 const btnRight = document.querySelector('#derecha');
@@ -70,6 +72,7 @@ function startGame(){
     if(!timeStart){
       timeStart = Date.now();
       timeInterval = setInterval(showTime, 100);
+      showRecord();
     }
 
 
@@ -125,12 +128,13 @@ function gameWin(){
       
         if(recordTime > playerTime){
           localStorage.setItem('record_time',playerTime);
-          console.log('Superaste el record, felicidades');
+          pResult.innerHTML = 'Superaste el record, felicidades';
         }else{
-          console.log('Lo siento, no superaste el record');
+          pResult.innerHTML = 'Lo siento, no superaste el record';
         }
     }else{
       localStorage.setItem('record_time',playerTime);
+      pResult.innerHTML = '¿Primera VEZ? Ahora superate!';
     }
 
   console.log(recordTime, playerTime);
@@ -155,6 +159,11 @@ function showTime(){
   spanTime.innerHTML =  Date.now() - timeStart;
  // timeStart = Date.now();
 }
+
+function showRecord(){
+  spanRecord.innerHTML = localStorage.getItem('record_time');
+}
+
 
 function levelLoseRestart(){
   lives--;
