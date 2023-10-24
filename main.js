@@ -37,8 +37,15 @@ window.addEventListener('resize',setCanvasSize);
 
 function setCanvasSize(){
   
-  canvasSize = Math.min(window.innerWidth, window.innerHeight) * 0.7;
+  /*My solution:
+  canvasSize = Math.min(window.innerWidth, window.innerHeight) * 0.7;*/ 
 
+  /**Platzi solutin:*/
+  if (window.innerHeight > window.innerWidth) {
+    canvasSize = window.innerWidth * 0.7;
+  } else {
+    canvasSize = window.innerHeight * 0.7;
+  }
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
     elementsSize = canvasSize / 10.4;
@@ -209,6 +216,7 @@ btnDown.addEventListener('click',moveDown);
 
 function moveUp(){
   
+  /**My solution 
       if((playerPosition.y - elementsSize) < elementsSize){
       console.log('OUT');
       
@@ -216,8 +224,16 @@ function moveUp(){
       
       playerPosition.y -= elementsSize;
       
-    }
+    }*/
+    /**Platzi solution: */
+    console.log('Me quiero mover hacia arriba');
 
+  if ((playerPosition.y - elementsSize) < elementsSize) {
+    console.log('OUT');
+  } else {
+    playerPosition.y -= elementsSize;
+    startGame();
+  }
     
     movePlayer();
     setCanvasSize();
