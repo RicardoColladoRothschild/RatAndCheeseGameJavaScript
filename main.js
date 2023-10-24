@@ -66,49 +66,58 @@ function setCanvasSize(){
 }
 
 function startGame(){
-  console.log({canvasSize, elementsSize});
-  console.log(window.innerWidth, window.innerHeight);
-   
+    //Providing size for the elements inside the canvas, again, base on canvas size we get the elementsSize, which came as a result from the windows size
     game.font = elementsSize +'px Arial';
     game.textAlign = 'center';
     console.log(level);
 
+    //Check if there are not more maps, because if player got to the last level, we should avoid any possible bug for trying to continue leveling.
     const map = maps[level];
     if(!map){
     
       gameWin();
     }
 
+    /**The function startGame() is execute several times during the game, because of it, we must prevent timestart to be restart it eveytime it happen
+     * way to do it was confirming 1 time, if it was empty, if it is not, this code should not be execute, otherwise, we save the start point time and then
+     * we use it to mark how long did it take to the player to get to the last level.
+     */
     if(!timeStart){
       timeStart = Date.now();
       timeInterval = setInterval(showTime, 100);
+      //this showRecord() function call, is to write on the DOM to a span, the timestart information or 
       showRecord();
     }
 
-
+    /*Map object is build as an string, to become in a multidimension array we must go throught the following code, so we can handle an x and y axis positions for elements
+    on the map */
     const mapRows = map.trim().split('\n');    
     const mapRowCols = mapRows.map(row=>row.trim().split(''));    
     showLives();
   //we need to remove every element from the enemies arrays, to reaload it.
     enemyPositions = [];
     game.clearRect(0,0,canvasSize,canvasSize);
+
+    //Following forEach is load to fullfill map with elements positions in canvas.
     mapRowCols.forEach((rows, rowIndx)=>{
        rows.forEach((col, colIndx)=>{
         const emoji = emojis[col];
         const posX = elementsSize * (colIndx + 1);
         const posY = elementsSize * (rowIndx + 1);
 
+        //O represents a door emoji, its the starting point for our player on every level
         if(col=='O' && (playerPosition.x===undefined && playerPosition.y===undefined)){
           playerPosition.x = posX;
           playerPosition.y = posY;
-          
-        }else if(col==='I'){
+            //I -> this represents the gift or goal the player must achieve to complete the current level        
+          }else if(col==='I'){
           giftPosition.x = posX;
           giftPosition.y = posY;         
-          console.log('QUESO EN POSICION:');
+          /*console.log('QUESO EN POSICION:');
           console.log(giftPosition.x);
-          console.log(giftPosition.y);
+          console.log(giftPosition.y);*/
           
+          //Evey x, on the map, is a poison, which will cause the player to go back to O position, and lose a live.
         }else if(col == 'X'){
           enemyPositions.push({
             x: posX,
