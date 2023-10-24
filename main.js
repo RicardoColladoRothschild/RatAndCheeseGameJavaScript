@@ -139,7 +139,7 @@ function startGame(){
 }
 
 function gameWin(){
-  console.log('Game finished');
+  
   clearInterval(timeInterval);
   const playerTime = Date.now() - timeStart;
   const recordTime = localStorage.getItem('record_time');
