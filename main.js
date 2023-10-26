@@ -143,6 +143,7 @@ function startGame(){
 
 function gameWin(){
   
+  console.log('Interval should stop here');
   clearInterval(timeInterval);
   const playerTime = Date.now() - timeStart;
   const recordTime = localStorage.getItem('record_time');
@@ -174,9 +175,15 @@ function screenAfterWin(){
 
       //creting congrats text
       game.font = '16px Verdana';
-      game.fillStyle = 'Red';
+      game.fillStyle = 'red';
         game.fillText('🎉🎉🎉Felicidades! has batido un record🎉🎉🎉',(canvasSize/2),(canvasSize/2));
-        game.fillRect(55,25,250,150);
+        const btnContinuar = document.createElement('button');
+        btnContinuar.innerHTML = 'Continuar';
+        
+        const btnsDivs = document.querySelector('.btns');
+        btnsDivs.append(btnContinuar);
+        
+        
 
 
 }
